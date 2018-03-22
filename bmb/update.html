@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px">
+<head>
+    <meta charset="UTF-8">
+    <title>教育局</title>
+    <link rel="stylesheet" href="../office/css/wx_tool.css?v=1.0.9">
+    <link rel="stylesheet" href="css/index.css?v=1.0.9">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+ <form  method="post" id="form">
+        <h2>教师报名表</h2>
+        <div class="body" id="app">
+            <input type="hidden" name="id" :value="userInfo.form_id"/>
+                <dl>
+                    <dt class="title check">头像</dt>
+                    <div class="item t-c ">
+                        <dt class="pin">
+                            <i style="display: none">头像</i>
+                            <input type="file" id="imgfile" class=""  tabindex="-1">
+                            <img :src="userInfo.exhibition" alt="" class="tx">
+                            添加头像
+                        </dt>
+                        <input type="hidden" id="imgUrl" name="user_photo_url" class="ipt" :value="userInfo.user_photo"/>
+                    </div>
+                    <dt class="title ">报考信息</dt>
+                    <div class="item">
+                        <dd class="w-dd ">
+                            <i class="label check">报名序号</i><input type="number" name="form_num" class="ipt" :value="userInfo.form_num" readonly="readonly" />
+                        </dd>
+                        <dd class="w-hd cell">
+                            <i class="label ">报考考点</i>
+                            <div class="fiex1 you">
+                                <select name="apply_center" id="select_k1" class=" select"  >
+                                    <option  v-for="item in schools"  :value='item.school_name'>{{item.school_name}}</option>
+                                </select>
+                            </div>
+                            <input type="hidden"  id="school_id" name="school_id"/>
+                        </dd>
+                        <dd class="w-hd cell">
+                            <i class="label ">报考单位</i>
+                            <div class="fiex1 you">
+                                <select name="apply_unit" id="select_k2" class="select select_k1"  >
+                                    <option v-for="item in WXUnits" :value="item.post_desc">{{item.post_desc}}</option>
+                                </select>
+                            </div>
+                        </dd>
+                        <dd class="w-hd cell">
+                            <i class="label ">报考岗位</i>
+                            <div class="fiex1 you">
+                                <select name="apply_post" id="select_k3" class="select"  >
+                                    <option v-for="item in WXPosts"  value=''>{{item.post_name}}</option>
+                                </select>
+                            </div>
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">岗位序号</i><input type="text" :value="userInfo.apply_num" id="apply_num" name="apply_num" class="ipt"  readonly="readonly" />
+                        </dd>
+                    </div>
+                    <dt class="title">个人信息</dt>
+                    <div class="item">
+                        <dd class="w-dd ">
+                            <i class="label check">姓名</i><input type="text" name="user_name" class="ipt"  :value="userInfo.user_name">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">身高</i><input type="text" name="user_hight" class="ipt"  :value="userInfo.user_hight">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">身份证号</i><input type="text" id="idCard" name="user_cardnum" class="ipt"   :value="userInfo.user_cardnum">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">出生日期</i><input type="date"   class="ipt laydate-icon"  >
+                            <input type="hidden" name="user_birthday" value="" class="time"  >
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">婚姻状态</i><input type="text" name="user_marry" class="ipt "   :value="userInfo.user_marry">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">移动电话</i><input type="number" name="user_mobile" class="ipt"   :value="userInfo.user_mobile">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">电子邮箱</i><input type="text" name="user_email" class="ipt"  :value="userInfo.user_email">
+                        </dd>
+                    </div>
+                    <dd class="">
+                        <i class="title">性别</i>
+                        <div class="item">
+                            <div class="radio-box">
+                                <span class="radio">
+                                   <input type="radio" name="user_sex" value="男" checked="checked"  >
+                               </span> 男
+                            </div>
+                            <div class="radio-box ">
+                                <span class="radio">
+                                    <input type="radio" name="user_sex" value="女"  >
+                                </span>女
+                            </div>
+                        </div>
+                    </dd>
+
+
+
+                    <dt class="title">学历信息</dt>
+                    <div class="item">
+                        <dd class="w-dd ">
+                            <i class="label check">毕业时间</i><input type="date"  class="ipt laydate-icon"  >
+                            <input type="hidden" name="user_grad_date" value="" class="time"  >
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">毕业院校</i><input type="text" name="user_grad_sch" class="ipt"   :value="userInfo.user_grad_sch">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">专业</i><input type="text" name="user_major" class="ipt"   :value="userInfo.user_major">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">学历</i><input type="text" name="user_education" class="ipt"   :value="userInfo.user_education">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">学位</i><input type="text"  name="user_degree" class="ipt"   :value="userInfo.user_degree">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">英语等级</i><input type="text" name="user_englishlevel" class="ipt"   :value="userInfo.user_englishlevel">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">普通话等级</i><input type="text" name="user_chineselevel" class="ipt"   :value="userInfo.user_chineselevel">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">计算机等级</i><input type="text" name="user_computerleve" class="ipt"   :value="userInfo.user_computerleve">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">学分绩点</i><input type="text" name="user_credit" class="ipt"  :value="userInfo.user_credit">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">综合测评</i><input type="text" name="user_compre" class="ipt"  :value="userInfo.user_compre">
+                        </dd>
+                    </div>
+                </dl>
+            <dt class="title">成绩排名</dt>
+                <div class="item">
+                    <dd class="w-dd cell">
+                        <i class="label check">班</i><input type="number" class="ipt" name="user_achieve_ban" placeholder="请输入第几名" :value="userInfo.user_achieve_ban"/>
+                    </dd>
+                    <dd class="w-dd cell">
+                        <i class="label check">级</i><input type="number" class="ipt" name="user_achieve_ji" placeholder="请输入第几名" :value="userInfo.user_achieve_ji"/>
+                    </dd>
+                </div>
+                <dl>
+                    <dd class="">
+                        <i class="title">是否师范生</i>
+                        <div class="item">
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_isstu" value="是" checked="checked"  >
+                            </span> 是
+                            </div>
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_isstu" value="否"  >
+                            </span>否
+                            </div>
+                        </div>
+
+                    </dd>
+                    <dd class="">
+                        <i class="title">是否免费师范生</i>
+                        <div class="item">
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_isfreestu" value="是" checked="checked" >
+                            </span>是
+                            </div>
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_isfreestu" value="否"  >
+                            </span>否
+                            </div>
+                        </div>
+
+                    </dd>
+                    <dd class="">
+                        <i class="title">是否有教师资格证</i>
+                        <div class="item">
+                            <div class="radio-box">
+                            <span class="radio" >
+                                <input type="radio" name="user_isqua" value="是" checked="checked" >
+                            </span>是
+                            </div>
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_isqua" value="否"  >
+                            </span>否
+                            </div>
+                        </div>
+                    </dd>
+                    <dt class="title">个人经历</dt>
+                     <div class="item">
+                             <dd class="w-dd ">
+                                 <i class="label check">奖学金</i>
+                                 <input type="text" name='user_scholarship' class="ipt" placeholder="请输入获取奖学金情况" :value="userInfo.user_scholarship">
+                             </dd>
+                             <dd class="w-dd cell">
+                                 <i class="label check">学生干部</i>
+                                 <input type="text" name="user_cadres"  class="ipt" placeholder="请输入任学生干部情况" :value="userInfo.user_cadres">
+                             </dd>
+                            <dd class="w-dd cell">
+                                <i class="label check">实习成绩</i><input type="text" name="user_pra_achieve" class="ipt"  :value="userInfo.user_pra_achieve">
+                            </dd>
+                            <dd class="w-dd cell">
+                                <i class="label check">实习单位</i><input type="text" name="user_pra_address" class="ipt"  :value="userInfo.user_pra_address">
+                            </dd>
+                     </div>
+                </dl>
+                <dl>
+                    <dd class="mb20">
+                        <i class="title">是否以签协议</i>
+                        <div class="item">
+                            <div class="radio-box">
+                            <span class="radio">
+                                 <input type="radio" name="user_issign" value="是" checked="checked" >
+                            </span> 是
+                            </div>
+                            <div class="radio-box">
+                            <span class="radio">
+                                <input type="radio" name="user_issign" value="否"  >
+                            </span>否
+                            </div>
+                        </div>
+                    </dd>
+                    <dt class="title">户籍信息</dt>
+                    <div class="item ">
+                        <dd class="w-dd cell">
+                            <i class="label check">生源地</i><input type="text" name="user_place" class="ipt"  :value="userInfo.user_place">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">现户籍所在地</i><input name="user_house_now" type="text" class="ipt"  :value="userInfo.user_house_now">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">籍贯</i><input name="user_house" type="text" class="ipt"  :value="userInfo.user_house">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">政治面貌</i><input name="user_political" type="text" class="ipt"  :value="userInfo.user_political">
+                        </dd>
+                        <dd class="w-dd cell">
+                            <i class="label check">联系地址</i><input type="text" name="user_address" class="ipt" :value="userInfo.user_address" >
+                        </dd>
+                    </div>
+                    <dd class="">
+                        <i class="title check">个人爱好与特长</i>
+                        <div class="item">
+                            <textarea class="textarea ipt" name="user_hobby"  :value="userInfo.user_hobby"></textarea>
+                        </div>
+                    </dd>
+                    <dd class="">
+                        <i class="title check">表彰与荣誉</i>
+                        <div class="item">
+                            <textarea class="textarea ipt" name="user_honor"  :value="userInfo.user_honor"></textarea>
+                        </div>
+                    </dd>
+                    <dd class="">
+                        <i class="title check">个人简历(从高中起)</i>
+                        <div class="item">
+                            <textarea class="textarea ipt" name="user_resume" :value="userInfo.user_resume"></textarea>
+                        </div>
+                    </dd>
+                </dl>
+                <div>
+                    <p class="cblue ft14 mb10 mt10 ml15">温馨提示:因材料不真实造成的所有后果责任自负<i class="cred ml10" id="agreement"></i></p>
+                    <a class="btn " id="submit">提交</a>
+                </div>
+            </div>
+            <div class="mask"></div>
+        </div>
+    </form>
+    <div class="agreement fly">
+        本表必须如实填写，字迹清晰，表彰与简历不够写可另纸附页。后附身份证推荐表、成绩单、教师资格证及其它相关材料，验原件收复印件。生源地、籍贯、现户籍所在地须填写到区（县）。
+        <p class="cred">因材料不真实造成的所有后果责任自负。</p>
+        <div class="confirm fr">确定</div>
+    </div>
+    <div class="msg">我是错误提示</div>
+    <div class="succ">
+        <img src="images/succ.png"  alt="">
+        <p>修改成功</p>
+    </div>
+    <script rel="stylesheet" src="js/jquery-3.2.1.min.js"></script>
+    <script rel="stylesheet" src="js/wx_shipei.js"></script>
+     <script src="https://unpkg.com/vue"></script>
+     <script rel="stylesheet" src="js/update.js?v=1.0.9"></script>
+</body>
+</html>
